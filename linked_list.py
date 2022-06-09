@@ -13,7 +13,7 @@ class LinkedList:
         self.head = None
         self.last_node = None
     
-    def to_array(self):
+    def to_list(self):
         l = []
         if self.head is None:
             return l
