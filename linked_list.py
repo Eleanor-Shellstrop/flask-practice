@@ -1,3 +1,6 @@
+import re
+
+
 class Node:
     def __init__(self, data, next_node=None):
         self.data = data
@@ -9,6 +12,18 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.last_node = None
+    
+    def to_array(self):
+        l = []
+        if self.head is None:
+            return l
+
+        node = self.head
+        while node: 
+            l.append(node.data)
+            node = node.next_node
+
+        return l
 
     def print_ll(self):
         ll_string = ""
@@ -18,16 +33,21 @@ class LinkedList:
         while node:
             ll_string += f" {str(node.data)} ->"
             node = node.next_node
+
         ll_string += "None"
         print(ll_string)
 
+    def insert_beginning(self, data):
+        if self.head is None:
+            self.head = Node(data, None)
+            self.last_node = self.head
+        new_node = Node(data, self.head)
+        self.head = new_node
 
-ll = LinkedList()
-node4 = Node("data4", None)
-node3 = Node("data3", node4)
-node2 = Node("data2", node3)
-node1 = Node("data1", node2)
+    def insert_at_end(self, data):
+        if self.head is None:
+            self.insert_beginning(data)
+            return
 
-ll.head = node1
-
-ll.print_ll()
+        self.last_node.next_node = Node(data, None)
+        self.last_node = self.last_node.next_node
